@@ -1,6 +1,9 @@
-import { HomeIcon } from "@primer/octicons-react";
 // LOS LINKS PUEDEN FUNCIONAR SIN JS
 import Link from "next/link";
+
+import { HomeIcon } from "@primer/octicons-react";
+
+import { ActiveLink } from "@/components/UI/ActiveLink";
 
 const navItems = [
   { path: "/about", text: "About" },
@@ -20,7 +23,7 @@ export const Navbar = () => {
         {
           navItems.map(item => (
             <li key={item.path}>
-              <Link href={item.path}>{item.text}</Link>
+              <ActiveLink {...item}/>
             </li>
           ))
         }
