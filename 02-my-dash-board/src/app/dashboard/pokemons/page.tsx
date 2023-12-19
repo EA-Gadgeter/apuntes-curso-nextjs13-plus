@@ -13,6 +13,8 @@ const getAllPokemons = async (limit = 20, offset = 0): Promise<SimplePokemon[]> 
       id: pokemon.url.split("/").at(-2)!
     }
   ));
+
+  throw new Error("Error que no debería de suceder");
   
   return pokemonArray;
 };

@@ -1,5 +1,8 @@
 # Los server componentes solo se renderizan una vez en el servidor
 
+## Archivo especial: error.tsx / .jsx
+En una carpeta podemos crear este tipo de archivo, de tal manera que cuando ocurre cualquier tipo de error que no permita mostrar el contenido de siempre, mostrara esta pantalla de error. Debido a que esto ya ocurre en tiempo de ejecución y hace uso de useEffect, es necesario que tenga el "use client" hasta arriba del archivo. Checar el error.tsx en la carpeta de pokemon para más detalles.
+
 ## Componente Link
 Desemboca en un <a>. Se hace prefetch de la página desde antes, por lo que al darle click la página carga casi de inmediato, dando la ilusión de que estamos en una SPA, cuando no es así.
 
