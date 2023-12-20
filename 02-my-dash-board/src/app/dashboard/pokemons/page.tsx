@@ -14,7 +14,8 @@ const getAllPokemons = async (limit = 20, offset = 0): Promise<SimplePokemon[]> 
     }
   ));
 
-  throw new Error("Error que no debería de suceder");
+  // Este error termina en el archivo error.tsx
+  // throw new Error("Error que no debería de suceder");
   
   return pokemonArray;
 };
