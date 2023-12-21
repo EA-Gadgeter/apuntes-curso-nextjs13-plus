@@ -85,6 +85,25 @@ export default async function PokemonsPage() {
 }
 ```
 
+### Generación de contenido estática
+Para poder hacer eso, es necesario indicarle a next cuales van a ser esas rutas, por lo que tenemos que exportar una función especial que se debe llamar exactamente como en el ejemplo, además obviamente de que el el parametro regresado debe ser el mismo que el indicado en la carpeta
+
+```tsx
+export async function generateStaticParams() {
+  const staticPokemonPages = Array.from({ length: POKEMON_STATIC_PAGES }).map((v, i) => {
+    return {
+      id: `${i + 1}`
+    };
+  });
+
+  return staticPokemonPages;
+}
+```
+
+Algo muy bueno de esto, es que si a Next le llegan a PEDIR algo que NO TIENE DE MANERA ESTÁTICA, de igual manera va a intentar hacer la petición, generar la página y guardarla. De esta manera a la siguiente manera que la pida se le servira el contenido más rapido. 
+ 
+### Podemos indicar mediante el fetch trucado, cada cuanto tiempo queremos que se regeneren las páginas estáticas en lugar de utilizar lo que hay cache
+
 ## Imágenes bajo demanda con Image
 Gracias al atributo priority y el componente Image de Next, podemos indicar si las imágenes son de proridad o no, es decir, se cargan inmediatamente al entrar a la página
 
