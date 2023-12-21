@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Image from "next/image";
 
-import type { Pokemon } from "@/interfaces/pokemon/pokemon";
+
+import { POKEMON_STATIC_PAGES } from "@/const/pokemon";
+import { getPokemonById } from "@/services/pokemon/getPokemonById";
 
 
 interface Props {
   params: { id: string }
 }
 
-const getPokemonById = async (id: string): Promise<Pokemon> => {
-  try {
-    const pokemon: Pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
-      cache: "force-cache"
-    }).then(res => res.json());
+export async function generateStaticParams() {
+  const staticPokemonPages = Array.from({ length: POKEMON_STATIC_PAGES }).map((v, i) => {
+    return {
+      id: `${i + 1}`
+    };
+  });
 
-    return pokemon;
-  } catch (error) {
-    notFound();
-  }
-};
+  // Tenemos que regresar un arreglo con los params a usar a la hora de construccion
+  return staticPokemonPages;
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
@@ -42,7 +42,6 @@ export default async function PokemonPage({ params }: Props) {
   // Ahora directamente podemos obtener los params y queryParams de la ruta por medio de las props
   const pokemon = await getPokemonById(params.id);
   
-
   return (
     <div className="flex mt-5 flex-col items-center text-slate-800">
       <div className="relative flex flex-col items-center rounded-[20px] w-[700px] mx-auto bg-white bg-clip-border  shadow-lg  p-3">

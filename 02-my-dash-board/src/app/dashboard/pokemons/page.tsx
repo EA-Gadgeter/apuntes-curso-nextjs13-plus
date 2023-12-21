@@ -1,27 +1,18 @@
-import { PokemonsResponse } from "@/interfaces/pokemon/pokemonsResponse";
-import type { SimplePokemon } from "@/interfaces/pokemon/simplePokemon";
+import type { Metadata } from "next";
 
 import { PokemonGrid } from "@/components/pokemon/PokemonGrid";
 
-const getAllPokemons = async (limit = 20, offset = 0): Promise<SimplePokemon[]> => {
-  const data: PokemonsResponse = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}offset=${offset}`)
-    .then(res => res.json());
+import { getAllPokemons } from "@/services/pokemon/getAllPokemons";
 
-  const pokemonArray = data.results.map(pokemon => (
-    { 
-      name: pokemon.name, 
-      id: pokemon.url.split("/").at(-2)!
-    }
-  ));
+import { POKEMON_STATIC_PAGES } from "@/const/pokemon";
 
-  // Este error termina en el archivo error.tsx
-  // throw new Error("Error que no debería de suceder");
-  
-  return pokemonArray;
+export const metadata: Metadata = {
+  title: "Primeros 151 Pokemon",
+  description: "Página que muestra los 151 Pokemon originales"
 };
 
 export default async function PokemonsPage() {
-  const pokemons = await getAllPokemons(151);
+  const pokemons = await getAllPokemons(POKEMON_STATIC_PAGES);
 
   return (
     <div className="flex flex-col">
