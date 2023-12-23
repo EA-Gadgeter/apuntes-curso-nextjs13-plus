@@ -19,7 +19,7 @@ interface Props {
 export const PokemonCard: FC<Props> = ({ pokemon }) => {
   const { id, name } = pokemon;
 
-  const isFavorite = useAppSelector(state => state.pokemonsReducer[id] !== undefined);
+  const isFavorite = useAppSelector(state => state.pokemonsReducer.favorites[id] !== undefined);
   const dispatch = useAppDispatch();
 
   const onToggle = () => dispatch(toggleFavorite(pokemon));
@@ -61,7 +61,7 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
 
             <div className="pl-3">
               <p className="text-sm font-medium text-gray-800 leading-none">
-              {isFavorite ? "Es favorito" : "No es favorito"}
+                {isFavorite ? "Es favorito" : "No es favorito"}
               </p>
               <p className="text-xs text-gray-500">View your campaigns</p>
             </div>
