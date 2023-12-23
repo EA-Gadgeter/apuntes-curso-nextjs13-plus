@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
+
 import { SimpleWidget } from "@/components/SimpleWidget";
+
+export const metadata: Metadata = {
+  title: "Admin dashboard",
+  description: "Este es el dashboard de la página",
+};
 
 export default function MainCounterPage() {
   return (
