@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { SimpleWidget } from "@/components/SimpleWidget";
+import { WidgetGrid } from "@/components/dashboard/WidgetGrid";
 
 export const metadata: Metadata = {
   title: "Admin dashboard",
@@ -13,9 +13,7 @@ export default function MainCounterPage() {
       <h1 className="mt-2 text-3xl">Dashboard</h1>
       <span className="text-xl">Información general</span>
 
-      <div className="flex flex-wrap justify-center gap-2 mt-2">
-        <SimpleWidget />
-      </div>
+      <WidgetGrid />
     </div>
   );
 }
