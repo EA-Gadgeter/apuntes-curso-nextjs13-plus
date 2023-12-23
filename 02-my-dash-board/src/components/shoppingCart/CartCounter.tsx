@@ -9,15 +9,30 @@ interface Props {
   value: number;
 }
 
+interface CounterResonse {
+  count: number;
+}
+
+const getApiCounter = async (): Promise<CounterResonse> => {
+  const dataCounter: CounterResonse = await fetch("/api/counter")
+    .then(res => res.json());
+  
+  return dataCounter;
+};
+
 export const CartCounter = ({ value = 0 }: Props) => {
   const { count } = useAppSelector(state => state.counterReducer);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(initCounterState(value));
-  }, [dispatch, value]);
-  
+  }, [dispatch, value]); */
 
+  useEffect(() => {
+    getApiCounter()
+      .then(data => dispatch(initCounterState(data.count)));
+  }, [dispatch]);
+  
   return (
     <>
       <span className="text-9xl">{count}</span>
