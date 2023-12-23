@@ -21,6 +21,22 @@ const getPokemonById = async (id: string): Promise<Pokemon> => {
 };
 ```
 
+## Archivo especial: route.ts / .js
+Basicamente un archivo que nos permite crear un endpoint de un REST API en cualquier parte de la aplicación, aunque, por orden, es recomendable meter todos los endpoints en un la carpeta API.
+
+Para crear un endpoint es tan facil como exportar una función con el nombre del verbo HTTP.
+
+NO PUEDE VIVIR UN archivo page O route EN EL MISMO DIRECTORIO
+```ts
+import { NextResponse } from "next/server";
+
+export async function GET(request: Request) {
+  return NextResponse.json({
+    count: 100
+  });
+}
+```
+
 ## Componente Link
 Desemboca en un anchor nativo de html, por lo que lo podemos estilar con tailwind o mediante clases. Se hace prefetch de la página desde antes, por lo que al darle click la página carga casi de inmediato, dando la ilusión de que estamos en una SPA, cuando no es así.
 
