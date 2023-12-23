@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 
-import { PokemonGrid } from "@/components/pokemon/PokemonGrid";
+import { FavoritePokemons } from "@/components/pokemon/FavoritePokemons";
 
 export const metadata: Metadata = {
   title: "Pokemons favoritos",
@@ -12,7 +12,7 @@ export default async function PokemonsPage() {
     <div className="flex flex-col">
       <span className="text-5xl my-2">Pokemons favoritos <small className="text-blue-500">Global state</small></span>
 
-      <PokemonGrid pokemons={[]} />      
+      <FavoritePokemons />
     </div> 
   );
 }
