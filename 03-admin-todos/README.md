@@ -7,6 +7,7 @@ docker compose up -d
 ```
 2. Crear .env a partir del example
 3. Remplazar las variables de entorno
+4. Hacer petición a al seed para [generar](http://localhost:3000/api/seed) información de prueba en la base de datos
 
 # Prisma commands
 ```shell
