@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import prisma from "@/lib/prisma";
 
 export const GET =  async (request: Request) => {
@@ -26,4 +27,12 @@ export const GET =  async (request: Request) => {
   });
 
   return NextResponse.json(todos);
+};
+
+export const POST =  async (request: Request) => {
+  const data = await request.json();
+
+  const newTodo = await prisma.todo.create({data});
+
+  return NextResponse.json(newTodo);
 };
