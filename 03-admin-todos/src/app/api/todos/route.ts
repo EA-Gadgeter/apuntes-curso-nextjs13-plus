@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import * as yup from "yup";
 
 import prisma from "@/lib/prisma";
 
@@ -29,10 +30,24 @@ export const GET =  async (request: Request) => {
   return NextResponse.json(todos);
 };
 
+const postSchema = yup.object({
+  description: yup.string().required(),
+  complete: yup.boolean().optional().default(false),
+});
+
 export const POST =  async (request: Request) => {
-  const data = await request.json();
+  try {
+    const { complete, description } = await postSchema.validate(await request.json());
+    const newTodo = await prisma.todo.create({
+      data: {
+        complete,
+        description
+      }
+    });
 
-  const newTodo = await prisma.todo.create({data});
-
-  return NextResponse.json(newTodo);
+    return NextResponse.json(newTodo);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(error, { status: 400 });
+  }
 };
