@@ -1,13 +1,16 @@
+"use client";
+
 import type { Todo } from "@prisma/client";
 
 import styles from "./TodoItem.module.css";
 import { IoCheckboxOutline, IoSquareOutline } from "react-icons/io5";
 
 interface Props {
-  todo: Todo
+  todo: Todo;
+  toggleTodo: (id: string, complete: boolean) => Promise<Todo>
 }
 
-export const TodoItem = ({ todo }: Props) => {
+export const TodoItem = ({ todo, toggleTodo }: Props) => {
   return (
     <div className={todo.complete ? styles.todoDone : styles.todoPending}>
       <div className="flex flex-col sm:flex-row justify-start items-center gap-4">
@@ -18,6 +21,7 @@ export const TodoItem = ({ todo }: Props) => {
           ${todo.complete ? "bg-blue-100" : "bg-red-100"}
           transition-all duration-100
         `}
+        onClick={() => toggleTodo(todo.id, !todo.complete)}
         >
           {
             todo.complete
