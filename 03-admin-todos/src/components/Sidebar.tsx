@@ -9,7 +9,7 @@ import { SidebarItem } from "./SidebarItem";
 const sidebarItems = [
   { title: "Dashboard", href: "/dashboard", icon: <IoCalendarClearOutline /> },
   { title: "Rest TODOs", href: "/dashboard/rest-todos", icon: <IoCheckboxOutline /> },
-  { title: "Server actions", href: "/dashboard/server-todos", icon: <IoListOutline /> }
+  { title: "Server TODOs", href: "/dashboard/server-todos", icon: <IoListOutline /> }
 ];
 
 export const Sidebar = () => {

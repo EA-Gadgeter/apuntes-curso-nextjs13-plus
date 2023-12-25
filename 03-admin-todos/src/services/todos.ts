@@ -15,3 +15,25 @@ export const updateTodo = async (id: string, complete: boolean): Promise<Todo> =
 
   return todoUpdated;
 };
+
+export const createTodo = async (description: string): Promise<Todo> => {
+  const body = {
+    description
+  };
+
+  const newTodo: Todo = await fetch("/api/todos", {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(res => res.json());
+
+  return newTodo;
+};
+
+export const deleteCompleted = async () => {
+  await fetch("/api/todos", {
+    method: "DELETE"
+  });
+};
