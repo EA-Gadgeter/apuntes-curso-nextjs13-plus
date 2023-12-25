@@ -18,7 +18,7 @@ export const TabBar: FC<Props> = ({ tabOptions = [1, 2, 3, 4], currentTab = 1 })
   };
 
   return (
-    <div className={`grid w-full grid-cols-${tabOptions.length} space-x-2 rounded-xl bg-gray-200 p-2`}>
+    <div className={`grid w-full ${"grid-cols-" + tabOptions.length} space-x-2 rounded-xl bg-gray-200 p-2`}>
       {
         tabOptions.map(opt => (
           <div key={opt}>
