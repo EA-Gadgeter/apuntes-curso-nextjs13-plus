@@ -2,14 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { CiLogout } from "react-icons/ci";
-import { IoCalendarClearOutline, IoCheckboxOutline, IoListOutline } from "react-icons/io5";
+import {IoCalendarClearOutline, IoCheckboxOutline, IoCodeWorkingOutline, IoListOutline} from "react-icons/io5";
 
 import { SidebarItem } from "./SidebarItem";
 
 const sidebarItems = [
   { title: "Dashboard", href: "/dashboard", icon: <IoCalendarClearOutline /> },
   { title: "Rest TODOs", href: "/dashboard/rest-todos", icon: <IoCheckboxOutline /> },
-  { title: "Server TODOs", href: "/dashboard/server-todos", icon: <IoListOutline /> }
+  { title: "Server TODOs", href: "/dashboard/server-todos", icon: <IoListOutline /> },
+  { title: "Cookies", href: "/dashboard/cookies", icon: <IoCodeWorkingOutline /> }
 ];
 
 export const Sidebar = () => {
