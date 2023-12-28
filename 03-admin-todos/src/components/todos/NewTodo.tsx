@@ -15,6 +15,7 @@ export const NewTodo = () => {
   // const router = useRouter();
 
   const [todoText, setTodoText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const onSubmitTodo = async (event: FormEvent) => {
     event.preventDefault();
@@ -34,6 +35,12 @@ export const NewTodo = () => {
     router.refresh();
   };*/
 
+  const onDeleteCompleted = async () => {
+    setIsDeleting(true);
+    await deleteCompletedTodos();
+    setIsDeleting(false);
+  };
+
   return (
     <form  className='flex w-full items-center mb-5' onSubmit={onSubmitTodo}>
       <input
@@ -51,10 +58,11 @@ export const NewTodo = () => {
       <span className='flex flex-1'></span>
 
       <button
-        onClick={ () => deleteCompletedTodos() }
+        onClick={onDeleteCompleted}
+        disabled={isDeleting}
         type='button' className="flex gap-2 items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all">
         <IoTrashOutline />
-        Eliminar completados
+        { isDeleting ? "Eliminando..." : "Eliminar completados" }
       </button>
     </form>
   );

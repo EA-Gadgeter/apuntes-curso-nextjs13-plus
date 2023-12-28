@@ -5,11 +5,12 @@ import { WidgetItem } from "@/components/WidgetItem";
 
 
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import {getUserServerSession} from "@/actions/authActions";
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions);
+  const user = await getUserServerSession();
 
-  if (!session){
+  if (!user){
     return redirect("/api/auth/signin");
   }
 
@@ -17,12 +18,12 @@ export default async function DashboardPage() {
     <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
       <WidgetItem title="Usuario conectado S-side">
         <div className="flex flex-col">
-          <span>{session.user?.name}</span>
-          <span>{session.user?.image}</span>
-          <span>{session.user?.email}</span>
+          <span>{user.name}</span>
+          <span>{user.image}</span>
+          <span>{user.email}</span>
 
           <div>
-            {JSON.stringify(session)}
+            {JSON.stringify(user)}
           </div>
         </div>
       </WidgetItem>

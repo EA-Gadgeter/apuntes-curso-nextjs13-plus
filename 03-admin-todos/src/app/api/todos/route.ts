@@ -3,6 +3,8 @@ import * as yup from "yup";
 
 import prisma from "@/lib/prisma";
 
+import { getUserServerSession } from "@/actions/authActions";
+
 export const GET =  async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const take = Number(searchParams.get("take") ?? "10");
@@ -36,12 +38,19 @@ const postSchema = yup.object({
 });
 
 export const POST =  async (request: Request) => {
+  const user = await getUserServerSession();
+
+  if (!user) {
+    return NextResponse.json("No autorizado", { status: 401 });
+  }
+
   try {
     const { complete, description } = await postSchema.validate(await request.json());
     const newTodo = await prisma.todo.create({
       data: {
         complete,
-        description
+        description,
+        userId: user.id
       }
     });
 

@@ -1,9 +1,12 @@
 "use server";
 
-import {revalidatePath} from "next/cache";
+import { revalidatePath } from "next/cache";
 
 import prisma from "@/lib/prisma";
-import type {Todo} from "@prisma/client";
+import type { Todo } from "@prisma/client";
+
+import { getUserServerSession } from "@/actions/authActions";
+
 
 const sleep = async (seconds: number): Promise<boolean> => {
   return new Promise(resolve => {
@@ -33,9 +36,15 @@ export const toggleTodo = async (id: string, complete: boolean): Promise<Todo> =
 
 export const addTodo = async (description: string) => {
   try {
+    const user = await getUserServerSession();
+
+    if (!user)
+      throw new Error("Error creando un todo");
+
     const newTodo =  await prisma.todo.create({
       data: {
-        description
+        description,
+        userId: user.id
       }
     });
 
