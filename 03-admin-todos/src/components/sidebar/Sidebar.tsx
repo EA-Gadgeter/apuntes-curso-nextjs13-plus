@@ -3,7 +3,6 @@ import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-import { CiLogout } from "react-icons/ci";
 import {
   IoBasketOutline,
   IoCalendarClearOutline,
@@ -14,6 +13,7 @@ import {
 } from "react-icons/io5";
 
 import { SidebarItem } from "./SidebarItem";
+import { LogoutButton } from "@/components/sidebar/LogoutButton";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
@@ -29,12 +29,8 @@ const sidebarItems = [
 export const Sidebar = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session){
-    return redirect("/api/auth/signin");
-  }
-
-  const userName = session.user?.name ?? "No name";
-  const userAvatar = session.user?.image ?? "https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp";
+  const userName = session?.user?.name ?? "No name";
+  const userAvatar = session?.user?.image ?? "https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp";
   const userRole = "Admin";
 
   return (
@@ -78,10 +74,7 @@ export const Sidebar = async () => {
       </div>
 
       <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-        <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-          <CiLogout />
-          <span className="hover:text-gray-700">Logout</span>
-        </button>
+        <LogoutButton />
       </div>
     </aside>
   );
